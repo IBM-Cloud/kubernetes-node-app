@@ -3,7 +3,7 @@
 set -e
 set -o pipefail
 
-function ibmdomain() {
+function ibmdomain_https() {
     cat yaml-templates/ingress-ibmdomain-template.yaml | \
         MYPROJECT=$MYPROJECT \
         INGRESS_SUBDOMAIN=$INGRESS_SUBDOMAIN \
@@ -15,7 +15,7 @@ function ibmdomain() {
 function customdomain_http() {
     cat yaml-templates/ingress-customdomain-http-template.yaml | \
         MYPROJECT=$MYPROJECT \
-        CUSTOM_DOMAIN=$CUSTOM_DOMAIN \
+        CUSTOM_SUBDOMAIN=$CUSTOM_SUBDOMAIN \
         KUBERNETES_NAMESPACE=$KUBERNETES_NAMESPACE \
         envsubst > ingress-customdomain-http.yaml
 }
@@ -23,7 +23,7 @@ function customdomain_http() {
 function customdomain_https() {
     cat yaml-templates/ingress-customdomain-https-template.yaml | \
     MYPROJECT=$MYPROJECT \
-    CUSTOM_DOMAIN=$CUSTOM_DOMAIN \
+    CUSTOM_SUBDOMAIN=$CUSTOM_SUBDOMAIN \
     INGRESS_SECRET_NAME=$INGRESS_SECRET_NAME \
     KUBERNETES_NAMESPACE=$KUBERNETES_NAMESPACE \
     envsubst > ingress-customdomain-https.yaml
