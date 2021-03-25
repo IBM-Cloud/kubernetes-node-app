@@ -36,7 +36,7 @@ function log_error() {
 
 case "$1" in
     "") ;;
-    ibmdomain) "$@"; exit;;
+    ibmdomain_https) "$@"; exit;;
     customdomain_http) "$@"; exit;;
     customdomain_https) "$@"; exit;;
     *) log_error "Unknown function: $1()"; exit 2;;
