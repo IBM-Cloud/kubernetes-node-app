@@ -3,6 +3,9 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 
+const os = require("os");
+const hostname = os.hostname();
+
 const healthRoutes = require('./routes/health-route');
 const swaggerRoutes = require('./routes/swagger-route');
 
@@ -15,6 +18,10 @@ app.use(bodyParser.json());
 // routes and api calls
 app.use('/health', healthRoutes);
 app.use('/swagger', swaggerRoutes);
+
+app.get('/hostname', (req, res) => {
+  res.send('Hello world from ' + hostname + '! Your app is up and running in a cluster!\n')
+})
 
 // default path to serve up index.html (single page application)
 app.all('', (req, res) => {
