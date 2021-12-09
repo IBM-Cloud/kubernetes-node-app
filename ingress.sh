@@ -24,7 +24,7 @@ function customdomain_https() {
     cat yaml-templates/ingress-customdomain-https-template.yaml | \
     MYPROJECT=$MYPROJECT \
     CUSTOM_SUBDOMAIN=$CUSTOM_SUBDOMAIN \
-    INGRESS_SECRET_NAME=$INGRESS_SECRET_NAME \
+    CUSTOM_SECRET_NAME=$CUSTOM_SECRET_NAME \
     KUBERNETES_NAMESPACE=$KUBERNETES_NAMESPACE \
     envsubst > ingress-customdomain-https.yaml
 }

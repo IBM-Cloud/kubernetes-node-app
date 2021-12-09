@@ -1,3 +1,6 @@
 node_modules
 server/.DS_Store
 .DS_Store
+ingress-customdomain-http.yaml
+ingress-customdomain-https.yaml
+ingress-ibmdomain.yaml

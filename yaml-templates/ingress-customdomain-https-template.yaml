@@ -1,23 +1,23 @@
 apiVersion: networking.k8s.io/v1
-   kind: Ingress
-   metadata:
-     name: ingress-for-customdomain-https
-     namespace: $KUBERNETES_NAMESPACE
-     annotations:
-       kubernetes.io/ingress.class: "public-iks-k8s-nginx"
-   spec:
-     tls:
-     - hosts:
-       - $CUSTOM_SUBDOMAIN
-       secretName: $INGRESS_SECRET_NAME
-     rules:
-     - host: $CUSTOM_SUBDOMAIN
-       http:
-         paths:
-         - path: /
-           pathType: Prefix
-           backend:
-             service:
-               name: kubernetesnodeapp
-               port:
-                number: 3000
+kind: Ingress
+metadata:
+  name: ingress-for-customdomain-https
+  namespace: $KUBERNETES_NAMESPACE
+  annotations:
+    kubernetes.io/ingress.class: "public-iks-k8s-nginx"
+spec:
+  tls:
+  - hosts:
+    - $CUSTOM_SUBDOMAIN
+    secretName: $CUSTOM_SECRET_NAME
+  rules:
+  - host: $CUSTOM_SUBDOMAIN
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: kubernetesnodeapp
+            port:
+              number: 3000
