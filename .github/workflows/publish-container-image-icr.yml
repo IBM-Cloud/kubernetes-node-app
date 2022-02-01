@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       ICR_NAMESPACE: solution-tutorials
-      ICR_REPOSITORY: tutorial-multi-region-k8s-cis
+      ICR_REPOSITORY: tutorial-scalable-webapp-kubernetes
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
