@@ -9,7 +9,7 @@ spec:
   tls:
   - hosts:
     - $CUSTOM_SUBDOMAIN
-    secretName: $CUSTOM_SECRET_NAME
+    secretName: kubernetesnodeapp-certificate
   rules:
   - host: $CUSTOM_SUBDOMAIN
     http:
@@ -21,3 +21,44 @@ spec:
             name: kubernetesnodeapp
             port:
               number: 3000
+---
+apiVersion: external-secrets.io/v1alpha1
+kind: SecretStore
+metadata:
+  name: kubernetesnodeapp-secretstore
+spec:
+  provider:
+    ibm:
+      serviceUrl: $SECRETS_MANAGER_URL
+      auth:
+        secretRef:
+          secretApiKeySecretRef:
+            name: kubernetesnodeapp-api-key
+            key: apikey
+---
+apiVersion: external-secrets.io/v1alpha1
+kind: ExternalSecret
+metadata:
+  name: kubernetesnodeapp-external-secret
+spec:
+  refreshInterval: 1m
+  secretStoreRef:
+    name: kubernetesnodeapp-secretstore
+    kind: SecretStore
+  target:
+    name: kubernetesnodeapp-certificate
+    template:
+      type: kubernetes.io/tls
+      data:
+        tls.crt: '{{ .crt | toString }}'
+        tls.key: '{{ .key | toString }}'
+    creationPolicy: Owner
+  data:
+  - secretKey: crt
+    remoteRef:
+      key: imported_cert/$CERTIFICATE_ID
+      property: certificate
+  - secretKey: key
+    remoteRef:
+      key: imported_cert/$CERTIFICATE_ID
+      property: private_key
