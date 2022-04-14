@@ -56,9 +56,9 @@ spec:
   data:
   - secretKey: crt
     remoteRef:
-      key: imported_cert/$CERTIFICATE_ID
+      key: $CERTIFICATE_TYPE/$CERTIFICATE_ID
       property: certificate
   - secretKey: key
     remoteRef:
-      key: imported_cert/$CERTIFICATE_ID
+      key: $CERTIFICATE_TYPE/$CERTIFICATE_ID
       property: private_key
