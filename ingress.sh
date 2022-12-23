@@ -3,18 +3,18 @@
 set -e
 set -o pipefail
 
-function ibmdomain_https() {
-    cat yaml-templates/ingress-ibmdomain-template.yaml | \
-        MYPROJECT=$MYPROJECT \
+function ibmsubdomain_https() {
+    cat yaml-templates/ingress-ibmsubdomain-template.yaml | \
+        MYAPP=$MYAPP \
         INGRESS_SUBDOMAIN=$INGRESS_SUBDOMAIN \
         INGRESS_SECRET_NAME=$INGRESS_SECRET_NAME \
         KUBERNETES_NAMESPACE=$KUBERNETES_NAMESPACE \
-        envsubst > ingress-ibmdomain.yaml
+        envsubst > ingress-ibmsubdomain.yaml
 }
 
 function customdomain_http() {
     cat yaml-templates/ingress-customdomain-http-template.yaml | \
-        MYPROJECT=$MYPROJECT \
+        MYAPP=$MYAPP \
         CUSTOM_SUBDOMAIN=$CUSTOM_SUBDOMAIN \
         KUBERNETES_NAMESPACE=$KUBERNETES_NAMESPACE \
         envsubst > ingress-customdomain-http.yaml
@@ -22,7 +22,7 @@ function customdomain_http() {
 
 function customdomain_https() {
     cat yaml-templates/ingress-customdomain-https-template.yaml | \
-    MYPROJECT=$MYPROJECT \
+    MYAPP=$MYAPP \
     CUSTOM_SUBDOMAIN=$CUSTOM_SUBDOMAIN \
     CUSTOM_SECRET_NAME=$CUSTOM_SECRET_NAME \
     KUBERNETES_NAMESPACE=$KUBERNETES_NAMESPACE \
@@ -36,7 +36,7 @@ function log_error() {
 
 case "$1" in
     "") ;;
-    ibmdomain_https) "$@"; exit;;
+    ibmsubdomain_https) "$@"; exit;;
     customdomain_http) "$@"; exit;;
     customdomain_https) "$@"; exit;;
     *) log_error "Unknown function: $1()"; exit 2;;

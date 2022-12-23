@@ -8,10 +8,10 @@ metadata:
 spec:
   tls:
   - hosts:
-    - $CUSTOM_SUBDOMAIN
+    - $MYAPP.$CUSTOM_DOMAIN
     secretName: kubernetesnodeapp-certificate
   rules:
-  - host: $CUSTOM_SUBDOMAIN
+  - host: $MYAPP.$CUSTOM_DOMAIN
     http:
       paths:
       - path: /
