@@ -4,7 +4,7 @@
   "description": "Start building your next Node.js Express app on IBM Cloud.",
   "private": true,
   "engines": {
-    "node": "^14.0.0"
+    "node": "^20.0.0"
   },
   "scripts": {
     "dev": "nodemon server/server.js",
@@ -35,21 +35,21 @@
     ]
   },
   "dependencies": {
-    "body-parser": "^1.19.0",
-    "express": "^4.17.1",
+    "body-parser": "^1.20.2",
+    "express": "^4.18.2",
     "ibm-cloud-env": "^0.2.7",
-    "swagger-ui-express": "^4.1.6"
+    "swagger-ui-express": "^4.6.3"
   },
   "devDependencies": {
-    "chai": "^4.3.4",
+    "chai": "^4.4.1",
     "eslint": "^7.32.0",
     "eslint-config-strongloop": "^2.1.0",
-    "husky": "^7.0.2",
-    "mocha": "^9.1.1",
-    "nodemon": "^2.0.12",
+    "husky": "^7.0.4",
+    "mocha": "^9.2.2",
+    "nodemon": "^2.0.22",
     "nyc": "^15.1.0",
     "sinon": "^11.1.2",
     "sinon-chai": "^3.7.0",
-    "supertest": "^6.1.6"
+    "supertest": "^6.3.4"
   }
 }

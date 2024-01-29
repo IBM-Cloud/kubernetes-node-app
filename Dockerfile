@@ -1,16 +1,16 @@
-FROM registry.access.redhat.com/ubi7/ubi:7.9-483
+FROM registry.access.redhat.com/ubi8/nodejs-20
 
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-RUN curl -sL https://rpm.nodesource.com/setup_14.x | bash -
-RUN yum install -y nodejs
+USER 0
+RUN fix-permissions ./
+USER 1001
 
-RUN mkdir /app
-WORKDIR /app
+RUN mkdir ./app
+WORKDIR $HOME/app
 
-COPY package.json /app
-RUN npm install --only=prod
-COPY server /app/server
-COPY public /app/public
+COPY package.json .
+RUN npm install --omit=dev
+COPY server ./server
+COPY public ./public
 
 ENV NODE_ENV production
 ENV PORT 3000
