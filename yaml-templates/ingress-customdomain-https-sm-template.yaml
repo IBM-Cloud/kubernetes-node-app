@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-for-customdomain-https
+  namespace: $KUBERNETES_NAMESPACE
+spec:
+  tls:
+  - hosts:
+    - $MYAPP.$CUSTOM_DOMAIN
+    secretName: nodeapp-tls-cert
+  rules:
+  - host: $MYAPP.$CUSTOM_DOMAIN
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: kubernetesnodeapp
+            port:
+              number: 3000
